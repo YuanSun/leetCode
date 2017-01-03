@@ -13,6 +13,6 @@ class Edge {
     }
     
     public void displayEdge() {
-        System.out.printf(" -> %s", target);
+        System.out.printf(" -> %s", target.getWord());
     }
 }

@@ -8,7 +8,19 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class FindMinPath {
-    public static void constructPath(Vertex beginWord, Vertex endWord, HashSet<Vertex> wordDict) {
+    /**
+     * 
+     * @param beginWord
+     * @param endWord
+     * @param wordDict 
+     * construct transform path from beginWord to endWord
+     * wordDict -> given word list in which word is available to change 
+     *              one char one time 
+     */
+    public static void constructPath(
+            Vertex beginWord, 
+            Vertex endWord, 
+            HashSet<Vertex> wordDict) {
         HashMap<String, Vertex> Vertice = new HashMap<>();
         wordDict.add(beginWord);
         wordDict.add(endWord);
@@ -36,12 +48,17 @@ public class FindMinPath {
             }
         }
         
-        HashMap<Double, ArrayList<Vertex>> transformSteps = findMinPath(beginWord, endWord);
+        displayGraph(wordDict);
+        
+        HashMap<Double, ArrayList<Vertex>> transformSteps = 
+                                            findMinPath(beginWord, endWord);
         if(transformSteps == null)
             System.out.println("No possible transfermation fould!!!");
         else {
             transformSteps.keySet().forEach(key -> {
-                System.out.println("It takes " + key.intValue() + " step(s) to transform from " + beginWord.getWord() + " to " + endWord.getWord() + ".");
+                System.out.println("\nIt takes " + key.intValue() + 
+                        " step(s) to transform from " + beginWord.getWord() 
+                        + " to " + endWord.getWord() + ".");
                 System.out.print("The path is: ");
                 transformSteps.get(key).forEach((u) -> {
                     System.out.print(u.getWord() + " ");
@@ -53,7 +70,17 @@ public class FindMinPath {
         
     }
     
-    private static HashMap<Double, ArrayList<Vertex>> findMinPath(Vertex beginWord, Vertex endWord) {
+    /**
+     * 
+     * @param beginWord
+     * @param endWord
+     * @return 
+     * find min path from beginWord to endWord through BSF
+     * return the number of step and the path in a hash map
+     */
+    private static HashMap<Double, ArrayList<Vertex>> findMinPath(
+            Vertex beginWord, 
+            Vertex endWord) {
         Queue<Vertex> queue = new LinkedList<>();
         beginWord.minDistance = 0.0;
         queue.add(beginWord);
@@ -63,8 +90,12 @@ public class FindMinPath {
             Vertex checkWord = queue.poll();
             
             // visit each edge of checkword
-            checkWord.adjacencies.stream().map((e) -> e.getTarget()).forEachOrdered((target) -> {
-                Double distanceThroughTarget = checkWord.minDistance + 1.0; // every edge has weight of 1
+            checkWord.adjacencies.stream()
+                    .map(
+                            (e) -> e.getTarget())
+                                    .forEachOrdered((target) -> {
+                Double distanceThroughTarget = checkWord.minDistance + 1.0; 
+                                                // every edge has weight of 1
                 // update min distance to the target and keep the path
                 if (distanceThroughTarget < target.minDistance) {                    
                     target.minDistance = distanceThroughTarget;
@@ -107,5 +138,18 @@ public class FindMinPath {
                return false;
         }
         return true;
+    }
+    
+    /**
+     * 
+     * @param wordDict 
+     * display the graph according to the one char difference relation
+     */
+    private static void displayGraph(HashSet<Vertex> wordDict) {
+        System.out.println("The graph:");
+        wordDict.stream().forEach(v -> {
+            v.displayAdjacencies();
+            System.out.println("");
+        });
     }
 }
