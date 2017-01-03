@@ -25,10 +25,13 @@ public class FindMinPath {
         for (int i = 0; i < wordDictArr.length - 1; i++) {
             for (int j = i + 1; j < wordDictArr.length; j++) {
                 if(isNeighbor(wordDictArr[i], wordDictArr[j])) {
-                    System.out.println("i is " + i + ", j is " + j);
-                    System.out.println("Word[i] is " + wordDictArr[i] + ", word[j] is " + wordDictArr[j]);
-                    Vertice.get(wordDictArr[i]).adjacencies.add(new Edge(Vertice.get(wordDictArr[j])));
-                    Vertice.get(wordDictArr[j]).adjacencies.add(new Edge(Vertice.get(wordDictArr[i])));
+                    // see if the word is in the Vertice
+                    Vertex source = Vertice.get(wordDictArr[i]);
+                    Vertex target = Vertice.get(wordDictArr[j]);
+                    if(source != null && target != null){
+                        source.adjacencies.add(new Edge(target));
+                        target.adjacencies.add(new Edge(source));
+                    }
                 }
             }
         }
@@ -38,8 +41,8 @@ public class FindMinPath {
             System.out.println("No possible transfermation fould!!!");
         else {
             transformSteps.keySet().forEach(key -> {
-                System.out.println("It takes " + key + " steps to transform from " + beginWord + " to " + endWord + ".");
-                System.out.print("The path is:");
+                System.out.println("It takes " + key.intValue() + " step(s) to transform from " + beginWord.getWord() + " to " + endWord.getWord() + ".");
+                System.out.print("The path is: ");
                 transformSteps.get(key).forEach((u) -> {
                     System.out.print(u.getWord() + " ");
                 });
@@ -52,6 +55,7 @@ public class FindMinPath {
     
     private static HashMap<Double, ArrayList<Vertex>> findMinPath(Vertex beginWord, Vertex endWord) {
         Queue<Vertex> queue = new LinkedList<>();
+        beginWord.minDistance = 0.0;
         queue.add(beginWord);
         
         // BFS
@@ -82,7 +86,7 @@ public class FindMinPath {
             path.add(wordPath);
             wordPath = wordPath.previous;
         }
-        
+        path.add(beginWord);
         Collections.reverse(path);
         HashMap<Double, ArrayList<Vertex>> shortestPath = new HashMap<>();
         shortestPath.put(minSteps, path);

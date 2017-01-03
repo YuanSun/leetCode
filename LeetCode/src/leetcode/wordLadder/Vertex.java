@@ -9,6 +9,7 @@ public class Vertex implements Comparable<Vertex>{
     public Vertex previous; // used for store path
     
     public Vertex(String word) {
+        this.adjacencies = new ArrayList<>();
         this.word = word;
     }
     
@@ -16,13 +17,15 @@ public class Vertex implements Comparable<Vertex>{
         return this.word;
     }
     
+    @Override
     public int compareTo(Vertex other) {
         return Double.compare(minDistance, other.minDistance);
     }
     
     public void displayAdjacencies() {
         System.out.printf("%s", word);
-        for(Edge e: adjacencies)
+        adjacencies.forEach((e) -> {
             e.displayEdge();
+        });
     }
 }
