@@ -66,9 +66,7 @@ public class FindMinPath {
             checkWord.adjacencies.stream().map((e) -> e.getTarget()).forEachOrdered((target) -> {
                 Double distanceThroughTarget = checkWord.minDistance + 1.0; // every edge has weight of 1
                 // update min distance to the target and keep the path
-                if (distanceThroughTarget < target.minDistance) {
-                    queue.remove(target); // check ifi necessary
-                    
+                if (distanceThroughTarget < target.minDistance) {                    
                     target.minDistance = distanceThroughTarget;
                     target.previous = checkWord;
                     queue.add(target);
