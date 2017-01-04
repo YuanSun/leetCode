@@ -20,11 +20,11 @@ public class ReverseListMain {
             ptr = ptr.next;
         }
         
-        ReverseLinkedList.reverseBetween(head, 2, 5);
+        head = ReverseLinkedList.reverseBetween(head, 4, 3);
         
-        System.out.println("Reversed linked list is:" );
+        System.out.println("\nReversed linked list is:" );
         ptr = head;
-        while(ptr.next != null) {
+        while(ptr != null) {
             ptr.displayNode();
             ptr = ptr.next;
         }

@@ -2,55 +2,47 @@ package leetcode.reverseLinkedList;
 
 public class ReverseLinkedList {
     public static ListNode reverseBetween(ListNode head, int m, int n) {
-        assert m!=n;
-        
-        int step = 0;
-        ListNode prev = null; // (m - 1)th node
-        ListNode first = null; // mth
-        ListNode second = null; // nth
-        ListNode last = null; // (n+1)th
-        
+        assert n > m && m >= 1 ;
+        int numOfElem = 0;
         ListNode ptr = head;
-        while(ptr.next != null) {
-            if(step+1 == m) {
-               if(m == 1) {
-                   first = head;
-                   prev = null;
-               }
-               else {
-                   first = ptr.next;
-                   prev = ptr;
-               }
-            }
-            
-            if(step == n) {
-                second = ptr;
-                last = ptr.next;
-            }
-            
+        // find out num of List
+        while(ptr != null) {
             ptr = ptr.next;
-            step++;
+            numOfElem++;
         }
         
-        ListNode cur = first.next;
-        ListNode next = cur.next;
+        // construct ptr arr
+        ptr = head;
+        ListNode[] ptrArr = new ListNode[numOfElem];
+        for (int i = 0; i < numOfElem; i++){
+            ptrArr[i] = ptr;
+            ptr = ptr.next;
+        }
         
-        if(m == 1) 
-            second = head;
-        else 
-            prev.next = second;
-        first.next = last;
+        //Reverse list
+        ListNode prev = null; //(m-1)th node
+        if(m > 1)
+            prev = ptrArr[m-2];
         
-        do {
-            cur.next = first;
-            ListNode temp = next;
-            next.next = cur;
-            first = cur;
-            cur = next;
-            next = temp.next;
-        } while (next.next != second);
+        ListNode last = null; //(n+1)th node
+        if(n != numOfElem)
+            last = ptrArr[n-1].next;
+
+        for (int i = 0; i < (n - m + 1); i++){
+            if(n-i-1 != 0)
+                ptrArr[n-i-1].next = ptrArr[n-i-2];
+            else
+                ptrArr[n-i-1].next = last;
+        }
         
-        return head;
+        if(prev != null)
+            prev.next = ptrArr[n-1];
+        ptrArr[m-1].next = last;
+        
+        if(m == 1)
+            return ptrArr[n-1];
+        else
+            return head;
     }
 
 }
