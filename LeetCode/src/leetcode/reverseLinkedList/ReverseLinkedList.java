@@ -2,7 +2,9 @@ package leetcode.reverseLinkedList;
 
 public class ReverseLinkedList {
     public static ListNode reverseBetween(ListNode head, int m, int n) {
-        assert n > m && m >= 1 ;
+        if(m >= n)
+            return head; //m >= n, will do nothing.
+        
         int numOfElem = 0;
         ListNode ptr = head;
         // find out num of List
