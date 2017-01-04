@@ -19,9 +19,9 @@ public class ListNode {
     
     public void displayNode() {
         if(dData == Double.NaN)
-            System.out.print("{" + iData + "}");
+            System.out.print("{" + iData + "} -> ");
         else
-            System.out.print("{" + iData + ", " + dData + "} ");
+            System.out.print("{" + iData + ", " + dData + "} -> ");
         
     }
 }

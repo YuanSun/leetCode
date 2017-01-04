@@ -19,8 +19,9 @@ public class ReverseListMain {
             ptr.displayNode();
             ptr = ptr.next;
         }
+        System.out.print("|||\n");
         
-        head = ReverseLinkedList.reverseBetween(head, 4, 3);
+        head = ReverseLinkedList.reverseBetween(head, 8, 10);
         
         System.out.println("\nReversed linked list is:" );
         ptr = head;
@@ -28,5 +29,7 @@ public class ReverseListMain {
             ptr.displayNode();
             ptr = ptr.next;
         }
+        
+        System.out.print("|||\n");
     }
 }
