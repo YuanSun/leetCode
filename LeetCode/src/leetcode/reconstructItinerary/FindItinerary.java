@@ -1,4 +1,4 @@
-package leetcode.wordLadder.reconstructItinerary;
+package leetcode.reconstructItinerary;
 
 import java.util.HashMap;
 import java.util.LinkedList;
