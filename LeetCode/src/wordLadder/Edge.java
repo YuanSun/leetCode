@@ -1,4 +1,4 @@
-package wordLadder;
+package leetcode.wordLadder;
 
 
 class Edge {

@@ -1,4 +1,4 @@
-package wordLadder;
+package leetcode.wordLadder;
 
 import java.util.HashSet;
 
