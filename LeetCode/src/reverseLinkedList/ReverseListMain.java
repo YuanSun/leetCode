@@ -1,4 +1,4 @@
-package leetcode.reverseLinkedList;
+package reverseLinkedList;
 
 /**
  *
