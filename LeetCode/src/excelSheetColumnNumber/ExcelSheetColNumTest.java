@@ -8,6 +8,7 @@ public class ExcelSheetColNumTest {
 		double ColNum = excelSheetColumnNumber.Solution.ExcelColNum(Col);
 		
 		System.out.println("The column number is " + ColNum);
+		// why always -
 	}
 
 }
