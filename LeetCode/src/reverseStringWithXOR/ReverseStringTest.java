@@ -16,5 +16,10 @@ public class ReverseStringTest {
         String result = ReverseString.ReverseString(str);
         System.out.println("Result is " + result);
        
+        int[] intArr = {-2, -1, 0, 4, 9, 23, 27};
+        
+        ReverseString.ReverseIntArr(intArr);
+        
+     
     }
 }
