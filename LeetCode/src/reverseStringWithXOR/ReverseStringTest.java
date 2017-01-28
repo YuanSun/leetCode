@@ -1,5 +1,7 @@
 package reverseStringWithXOR;
 
+import enumTest.Directions;
+
 public class ReverseStringTest {
     public static void main(String[] args) {
         char num1 = 'C';
@@ -20,6 +22,14 @@ public class ReverseStringTest {
         
         ReverseString.ReverseIntArr(intArr);
         
-     
+        
+        /**
+         * Test on enums
+         */
+        Directions dir = Directions.SOUTH;
+        //when the enum is called, the constructor is called automatically 
+        // to assign String value to the constants
+        System.out.println(dir.getDirectionCode());
+        System.out.println(dir.ordinal());
     }
 }
